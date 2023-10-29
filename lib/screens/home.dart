@@ -54,10 +54,25 @@ class Home extends StatelessWidget {
         ]));
   }
 
+  getLoadingWidget() {
+    return Center(child: CircularProgressIndicator());
+  }
+
+  getErrorWidget(message) {
+    return Center(child: Text(message));
+  }
+
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<DictionaryCubit>();
     return Scaffold(
         backgroundColor: Colors.blueGrey[900],
-        body: getDictionaryFormWidget(context));
+        body: cubit.state is DictionaryInitial
+            ? getLoadingWidget()
+            : cubit.state is DictionaryError
+                ? getErrorWidget('There are some error.')
+                    ? cubit.state is DictionaryInitial
+                    : getDictionaryFormWidget(context)
+                : Container());
   }
 }
