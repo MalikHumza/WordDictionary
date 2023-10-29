@@ -67,12 +67,12 @@ class Home extends StatelessWidget {
     final cubit = context.watch<DictionaryCubit>();
     return Scaffold(
         backgroundColor: Colors.blueGrey[900],
-        body: cubit.state is DictionaryInitial
+        body: cubit.state is DictionarySearching
             ? getLoadingWidget()
             : cubit.state is DictionaryError
                 ? getErrorWidget('There are some error.')
-                    ? cubit.state is DictionaryInitial
-                    : getDictionaryFormWidget(context)
-                : Container());
+                : cubit.state is DictionaryInitial
+                    ? getDictionaryFormWidget(context)
+                    : Container());
   }
 }
