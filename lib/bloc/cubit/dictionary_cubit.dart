@@ -19,7 +19,7 @@ class DictionaryCubit extends Cubit<DictionaryState> {
       if (words == null) {
         emit(DictionaryError('Words cannot be emmpty'));
       } else {
-        DictionarySearched(words);
+        emit(DictionarySearched(words));
       }
     } on Exception catch (e) {
       print(e);
